@@ -1,0 +1,46 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Dependency directories
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# IDE & project files
+.idea
+
+# MacOS files
+.DS_Store
+
+# Bower
+bower_components/
+
+# Temp files
+tmp
+
+# Production
+build
+
+# Testing
+coverage
+
+# misc
+.DS_Store
+.env
+npm-debug.log
