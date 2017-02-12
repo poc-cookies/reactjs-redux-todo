@@ -1,3 +1,5 @@
+import {combineReducers} from 'redux';
+
 const todo = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -41,12 +43,31 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
   }
 };
 
-const todoApp = (state = {}, action) => {
+/**
+ const combineReducers = (reducersMap = {}) => {
+  const keys = Object.keys(reducersMap);
+  return (state = {}, action) => {
+    return keys.reduce((acc, key) => {
+      acc[key] = reducersMap[key](state[key], action);
+      return acc;
+    }, {});
+  };
+};
+ */
+
+const todoApp = combineReducers({
+  todos,
+  visibilityFilter
+});
+
+/**
+ const todoApp = (state = {}, action) => {
   return {
     todos: todos(state.todos, action),
     visibilityFilter: visibilityFilter(state.visibilityFilter, action)
   };
 };
+ */
 
 export {
   todos,
