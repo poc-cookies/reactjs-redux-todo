@@ -1,5 +1,5 @@
 import deepFreeze from 'deep-freeze';
-import {todos} from './todos';
+import {todos, todoApp} from './todos';
 
 it('adds todo', () => {
   const stateBefore = [];
@@ -51,5 +51,43 @@ it('toggles todo', () => {
 
   expect(
     todos(stateBefore, action)
+  ).toEqual(stateAfter);
+});
+
+it('visibility filter change', () => {
+  const stateBefore = {
+    todos: [{
+      id: 0,
+      text: 'Learn Redux',
+      completed: false
+    }, {
+      id: 1,
+      text: 'Go shopping',
+      completed: true
+    }],
+    visibilityFilter: 'SHOW_ALL'
+  };
+  const action = {
+    type: 'SET_VISIBILITY_FILTER',
+    filter: 'SHOW_COMPLETED'
+  };
+  const stateAfter = {
+    todos: [{
+      id: 0,
+      text: 'Learn Redux',
+      completed: false
+    }, {
+      id: 1,
+      text: 'Go shopping',
+      completed: true
+    }],
+    visibilityFilter: 'SHOW_COMPLETED'
+  };
+
+  deepFreeze(stateBefore);
+  deepFreeze(action);
+
+  expect(
+    todoApp(stateBefore, action)
   ).toEqual(stateAfter);
 });
