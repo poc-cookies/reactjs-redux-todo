@@ -1,4 +1,5 @@
-import {combineReducers} from 'redux';
+import {combineReducers, createStore} from 'redux';
+import React, {Component} from 'react';
 
 const todo = (state = {}, action) => {
   switch (action.type) {
@@ -69,7 +70,38 @@ const todoApp = combineReducers({
 };
  */
 
+const store = createStore(todoApp);
+
+let nextTodoId = 0;
+
+class TodoApp extends Component {
+  render () {
+    return (
+      <div>
+        <input ref={node => {
+          this.input = node;
+        }}/>
+        <button onClick={() => {
+          store.dispatch({
+            type: 'ADD_TODO',
+            id: nextTodoId++,
+            text: this.input.value
+          });
+          this.input.value = '';
+        }}>
+          Add Todo
+        </button>
+        <ul>
+          {this.props.todos.map(todo => <li key={todo.id}>{todo.text}</li>)}
+        </ul>
+      </div>
+    );
+  }
+}
+
 export {
   todos,
-  todoApp
+  todoApp,
+  TodoApp,
+  store // Just to have tests passed (Can't render component on not-existing element). Will be deleted right after refactoring of component.
 };
