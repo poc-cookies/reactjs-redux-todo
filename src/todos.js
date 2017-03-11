@@ -224,10 +224,7 @@ class VisibleTodoList extends Component {
   }
 }
 
-const TodoApp = ({
-  todos,
-  visibilityFilter
-}) => (
+const TodoApp = () => (
   <div>
     <AddTodo/>
     <VisibleTodoList/>
@@ -238,6 +235,5 @@ const TodoApp = ({
 export {
   todos,
   todoApp,
-  TodoApp,
-  store // Just to have tests passed (Can't render component on not-existing element). Will be deleted right after refactoring of component.
+  TodoApp
 };
