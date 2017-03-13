@@ -1,9 +1,10 @@
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {TodoApp} from './todos';
+import {createStore} from 'redux';
+import {TodoApp, todoApp} from './todos';
 
 ReactDOM.render(
-  <TodoApp/>,
+  <TodoApp store={createStore(todoApp)}/>,
   document.getElementById('root')
 );

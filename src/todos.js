@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from 'redux';
+import {combineReducers} from 'redux';
 import React, {Component} from 'react';
 
 const todo = (state = {}, action) => {
@@ -70,8 +70,6 @@ const todoApp = combineReducers({
 };
  */
 
-const store = createStore(todoApp);
-
 const Link = ({
   active,
   children,
@@ -93,6 +91,7 @@ const Link = ({
 class FilterLink extends Component {
 
   componentDidMount () {
+    const {store} = this.props;
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
   }
 
@@ -102,6 +101,7 @@ class FilterLink extends Component {
 
   render () {
     const props = this.props;
+    const {store} = props;
     const state = store.getState();
 
     return (
@@ -146,7 +146,7 @@ const TodoList = ({
 
 let nextTodoId = 0;
 
-const AddTodo = () => {
+const AddTodo = ({store}) => {
   let input;
 
   return (
@@ -168,19 +168,19 @@ const AddTodo = () => {
   );
 };
 
-const Footer = () => (
+const Footer = ({store}) => (
   <p>
     Show:
     {' '}
-    <FilterLink filter="SHOW_ALL">
+    <FilterLink filter="SHOW_ALL" store={store}>
       All
     </FilterLink>
     {' '}
-    <FilterLink filter="SHOW_ACTIVE">
+    <FilterLink filter="SHOW_ACTIVE" store={store}>
       Active
     </FilterLink>
     {' '}
-    <FilterLink filter="SHOW_COMPLETED">
+    <FilterLink filter="SHOW_COMPLETED" store={store}>
       Completed
     </FilterLink>
   </p>
@@ -202,6 +202,7 @@ const getVisibleTodos = (todos, filter) => {
 class VisibleTodoList extends Component {
 
   componentDidMount () {
+    const {store} = this.props;
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
   }
 
@@ -210,6 +211,7 @@ class VisibleTodoList extends Component {
   }
 
   render () {
+    const {store} = this.props;
     const state = store.getState();
 
     return (
@@ -224,11 +226,11 @@ class VisibleTodoList extends Component {
   }
 }
 
-const TodoApp = () => (
+const TodoApp = ({store}) => (
   <div>
-    <AddTodo/>
-    <VisibleTodoList/>
-    <Footer />
+    <AddTodo store={store}/>
+    <VisibleTodoList store={store}/>
+    <Footer store={store}/>
   </div>
 );
 
