@@ -2,7 +2,8 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
-import {Provider, TodoApp, todoApp} from './todos';
+import {Provider} from 'react-redux';
+import {TodoApp, todoApp} from './todos';
 
 ReactDOM.render(
   <Provider store={createStore(todoApp)}>
